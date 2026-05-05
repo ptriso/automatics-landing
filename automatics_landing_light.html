@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoMatics - Fintech Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-dark: #0a1f44;
+    --blue-mid: #0d47a1;
+    --blue-accent: #1565c0;
+    --blue-neon: #1976d2;
+    --blue-light: #e3f0fc;
+    --blue-lighter: #f0f7ff;
+    --white: #ffffff;
+    --gray-100: #f5f7fa;
+    --gray-200: #e8edf5;
+    --gray-300: #c8d3e0;
+    --gray-500: #6b7c93;
+    --gray-700: #374151;
+    --emerald: #00875a;
+    --emerald-bg: #e6f7f1;
+    --coral: #d32f2f;
+    --coral-bg: #fdecea;
+    --border: rgba(13,71,161,0.12);
+    --shadow-sm: 0 2px 12px rgba(13,71,161,0.08);
+    --shadow-md: 0 8px 32px rgba(13,71,161,0.12);
+    --shadow-lg: 0 20px 60px rgba(13,71,161,0.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--blue-dark);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 5%;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-logo { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; color: var(--blue-dark); }
+  .nav-logo span { color: var(--blue-neon); }
+  .nav-badge { font-size: 0.58rem; color: var(--blue-neon); border: 1.5px solid var(--blue-neon); border-radius: 4px; padding: 2px 6px; margin-left: 6px; letter-spacing: 1.5px; font-weight: 700; vertical-align: middle; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: var(--gray-500); text-decoration: none; font-size: 0.87rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--blue-neon); }
+  .nav-cta { display: flex; gap: 10px; align-items: center; }
+
+  /* BUTTONS */
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue-mid), var(--blue-neon));
+    color: #fff; border: none; padding: 11px 26px; border-radius: 8px;
+    font-size: 0.88rem; font-weight: 700; cursor: pointer; letter-spacing: 0.3px;
+    transition: all 0.25s; box-shadow: 0 4px 14px rgba(13,71,161,0.25);
+    font-family: 'Montserrat', sans-serif;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,71,161,0.35); }
+  .btn-outline {
+    background: transparent; color: var(--blue-neon);
+    border: 1.5px solid var(--blue-neon); padding: 10px 24px; border-radius: 8px;
+    font-size: 0.88rem; font-weight: 600; cursor: pointer;
+    transition: all 0.25s; font-family: 'Montserrat', sans-serif;
+  }
+  .btn-outline:hover { background: var(--blue-light); transform: translateY(-2px); }
+
+  /* HERO */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 6% 80px;
+    gap: 48px;
+    background: linear-gradient(135deg, var(--white) 0%, var(--blue-lighter) 60%, var(--blue-light) 100%);
+    overflow: hidden;
+  }
+  /* decorative circles */
+  .hero::before {
+    content: '';
+    position: absolute; top: -120px; right: -120px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(21,101,192,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -80px; left: 30%;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(21,101,192,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { flex: 0 0 auto; max-width: 500px; position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--blue-light); border: 1.5px solid rgba(25,118,210,0.2);
+    padding: 6px 14px; border-radius: 30px; font-size: 0.75rem;
+    color: var(--blue-neon); letter-spacing: 1px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 26px;
+  }
+  .hero-tag::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--blue-neon); display: inline-block; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+  .hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 900; line-height: 1.08;
+    letter-spacing: -1px; margin-bottom: 20px;
+    color: var(--blue-dark);
+  }
+  .hero h1 em { color: var(--blue-neon); font-style: normal; }
+  .hero p { font-size: 1rem; color: var(--gray-500); max-width: 420px; line-height: 1.7; margin-bottom: 38px; }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* TABLET MOCKUP */
+  .hero-visual {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    min-width: 0; position: relative; z-index: 1;
+  }
+  .tablet-mockup {
+    background: var(--white);
+    border-radius: 22px;
+    border: 1.5px solid var(--gray-200);
+    padding: 22px;
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(13,71,161,0.04);
+    width: 100%; max-width: 520px;
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  .tablet-topbar { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--gray-200); }
+  .tablet-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .tablet-topbar .logo-sm { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem; margin-left: auto; color: var(--blue-dark); }
+  .tablet-topbar .logo-sm span { color: var(--blue-neon); }
+  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; }
+  .metric-card { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 10px; padding: 10px 12px; }
+  .metric-label { font-size: 0.58rem; color: var(--gray-500); margin-bottom: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+  .metric-val { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.95rem; color: var(--blue-dark); }
+  .metric-chg { font-size: 0.55rem; color: var(--emerald); font-weight: 700; margin-top: 2px; }
+  .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .chart-box { background: var(--blue-lighter); border: 1px solid rgba(25,118,210,0.12); border-radius: 10px; padding: 12px; }
+  .chart-title { font-size: 0.6rem; color: var(--gray-500); font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .chart-val { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.25rem; color: var(--blue-neon); }
+  .chart-sub { font-size: 0.55rem; color: var(--emerald); font-weight: 700; }
+  .mini-chart { width: 100%; height: 38px; margin-top: 6px; }
+
+  /* STATS BAR */
+  .stats-bar {
+    position: relative; z-index: 1;
+    background: var(--blue-dark);
+    display: flex; justify-content: center; flex-wrap: wrap;
+  }
+  .stat-item { padding: 26px 48px; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: 'Montserrat', sans-serif; font-size: 1.9rem; font-weight: 900; color: #fff; }
+  .stat-desc { font-size: 0.78rem; color: rgba(255,255,255,0.55); font-weight: 500; margin-top: 2px; }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; }
+  .section-pad { padding: 90px 5%; }
+  .section-header { text-align: center; margin-bottom: 56px; }
+  .section-tag { display: inline-block; color: var(--blue-neon); font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; }
+  .section-header h2 { font-family: 'Montserrat', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.5px; color: var(--blue-dark); }
+  .section-header p { color: var(--gray-500); font-size: 1rem; max-width: 520px; margin: 12px auto 0; }
+
+  /* FEATURES */
+  .features-bg { background: var(--gray-100); }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; max-width: 1100px; margin: 0 auto; }
+  .feat-card {
+    background: var(--white); border: 1.5px solid var(--gray-200);
+    border-radius: 16px; padding: 32px 28px;
+    transition: all 0.3s; position: relative; overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .feat-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue-mid), var(--blue-neon)); opacity: 0; transition: opacity 0.3s; }
+  .feat-card:hover { transform: translateY(-6px); border-color: rgba(25,118,210,0.25); box-shadow: var(--shadow-md); }
+  .feat-card:hover::after { opacity: 1; }
+  .feat-icon { width: 52px; height: 52px; border-radius: 14px; background: var(--blue-light); border: 1.5px solid rgba(25,118,210,0.15); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 20px; }
+  .feat-card h3 { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--blue-dark); }
+  .feat-card p { font-size: 0.87rem; color: var(--gray-500); line-height: 1.65; }
+
+  /* SIMULATOR */
+  .simulator-section { background: var(--white); }
+  .simulator-wrap { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.3fr; gap: 36px; align-items: start; }
+  .sim-form-card { background: var(--white); border: 1.5px solid var(--gray-200); border-radius: 20px; padding: 36px 32px; box-shadow: var(--shadow-md); }
+  .sim-form-card h3 { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 800; margin-bottom: 6px; color: var(--blue-dark); }
+  .sim-form-card .sub { font-size: 0.83rem; color: var(--gray-500); margin-bottom: 26px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: 0.75rem; color: var(--gray-500); font-weight: 700; margin-bottom: 7px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .form-group select, .form-group input {
+    width: 100%; background: var(--gray-100); border: 1.5px solid var(--gray-200);
+    color: var(--blue-dark); padding: 11px 14px; border-radius: 10px;
+    font-size: 0.9rem; font-family: 'Inter', sans-serif; outline: none; appearance: none;
+    transition: border-color 0.2s;
+  }
+  .form-group select:focus, .form-group input:focus { border-color: var(--blue-neon); box-shadow: 0 0 0 3px rgba(25,118,210,0.1); background: var(--white); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grace-btns { display: flex; gap: 10px; }
+  .grace-btn { flex: 1; padding: 10px; border-radius: 9px; border: 1.5px solid var(--gray-200); background: var(--gray-100); color: var(--gray-500); font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; font-family: 'Inter', sans-serif; }
+  .grace-btn.active, .grace-btn:hover { border-color: var(--blue-neon); color: var(--blue-neon); background: var(--blue-light); }
+  .sim-btn { width: 100%; margin-top: 10px; padding: 14px; font-size: 1rem; border-radius: 11px; }
+  .results-card { background: var(--white); border: 1.5px solid var(--gray-200); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md); }
+  .results-header { padding: 20px 28px; border-bottom: 1.5px solid var(--gray-200); display: flex; align-items: center; justify-content: space-between; background: var(--blue-dark); }
+  .results-header h3 { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; }
+  .badge-sbs { background: rgba(0,135,90,0.2); color: #00e096; border: 1px solid rgba(0,135,90,0.4); font-size: 0.68rem; padding: 4px 10px; border-radius: 20px; font-weight: 700; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  thead th { padding: 11px 14px; background: var(--blue-lighter); color: var(--blue-neon); font-weight: 700; text-align: right; letter-spacing: 0.3px; font-size: 0.7rem; text-transform: uppercase; border-bottom: 1.5px solid var(--gray-200); }
+  thead th:first-child { text-align: center; }
+  tbody tr { border-bottom: 1px solid var(--gray-200); transition: background 0.15s; }
+  tbody tr:hover { background: var(--blue-lighter); }
+  tbody td { padding: 10px 14px; text-align: right; color: var(--gray-500); font-size: 0.8rem; }
+  tbody td:first-child { text-align: center; color: var(--blue-dark); font-weight: 700; }
+  .td-green { color: var(--emerald) !important; font-weight: 600; }
+  .metrics-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1.5px solid var(--gray-200); }
+  .metric-box { padding: 16px 20px; border-right: 1px solid var(--gray-200); background: var(--gray-100); }
+  .metric-box:last-child { border-right: none; }
+  .metric-box .mlabel { font-size: 0.65rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px; }
+  .metric-box .mval { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 900; color: var(--blue-neon); }
+  .metric-box .msub { font-size: 0.65rem; color: var(--emerald); font-weight: 700; margin-top: 2px; }
+
+  /* SBS */
+  .sbs-section { background: var(--blue-dark); }
+  .sbs-wrap { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .sbs-icon { font-size: 3rem; margin-bottom: 16px; }
+  .sbs-wrap h2 { font-family: 'Montserrat', sans-serif; font-size: 1.9rem; font-weight: 800; margin-bottom: 14px; color: #fff; }
+  .sbs-wrap > div > p { color: rgba(255,255,255,0.6); line-height: 1.7; font-size: 0.95rem; margin-bottom: 20px; }
+  .sbs-items { display: flex; flex-direction: column; gap: 14px; }
+  .sbs-item { display: flex; align-items: flex-start; gap: 12px; }
+  .sbs-check { width: 22px; height: 22px; border-radius: 50%; background: rgba(0,135,90,0.2); border: 1px solid rgba(0,135,90,0.5); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #00e096; flex-shrink: 0; margin-top: 2px; }
+  .sbs-item p { font-size: 0.87rem; color: rgba(255,255,255,0.6); margin: 0; }
+  .sbs-item strong { color: #fff; }
+  .sbs-visual { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 28px; backdrop-filter: blur(10px); }
+  .sbs-visual h4 { font-family: 'Montserrat', sans-serif; font-size: 0.88rem; font-weight: 700; color: #90caf9; margin-bottom: 18px; }
+  .cost-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.85rem; }
+  .cost-item:last-child { border-bottom: none; }
+  .cost-item .cname { color: rgba(255,255,255,0.55); }
+  .cost-item .cval { font-weight: 700; color: #fff; }
+  .cost-item.total .cname, .cost-item.total .cval { color: #90caf9; font-weight: 900; font-size: 1rem; font-family: 'Montserrat', sans-serif; }
+
+  /* SECURITY */
+  .security-bg { background: var(--gray-100); }
+  .security-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 900px; margin: 0 auto; }
+  .sec-card { background: var(--white); border: 1.5px solid var(--gray-200); border-radius: 16px; padding: 28px 24px; text-align: center; box-shadow: var(--shadow-sm); transition: box-shadow 0.3s; }
+  .sec-card:hover { box-shadow: var(--shadow-md); }
+  .sec-icon { font-size: 2rem; margin-bottom: 14px; }
+  .sec-card h4 { font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: var(--blue-dark); }
+  .sec-card p { font-size: 0.82rem; color: var(--gray-500); line-height: 1.6; }
+
+  /* FOOTER */
+  footer { background: var(--blue-dark); padding: 50px 5% 28px; }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; }
+  .footer-brand .nav-logo { font-size: 1.5rem; display: block; margin-bottom: 10px; color: #fff; }
+  .footer-brand .nav-logo span { color: #90caf9; }
+  .footer-brand p { font-size: 0.83rem; color: rgba(255,255,255,0.45); max-width: 240px; line-height: 1.6; }
+  .footer-col h5 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.83rem; margin-bottom: 16px; color: rgba(255,255,255,0.85); }
+  .footer-col a { display: block; color: rgba(255,255,255,0.45); font-size: 0.82rem; text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+  .footer-col a:hover { color: #90caf9; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 12px; }
+  .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+  .footer-seal { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: #90caf9; font-weight: 700; letter-spacing: 1px; }
+  .footer-seal::before { content: '⬡'; font-size: 1rem; }
+
+  /* MODAL */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(10,31,68,0.6); backdrop-filter: blur(8px); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--white); border: 1.5px solid var(--gray-200); border-radius: 22px; padding: 36px; max-width: 460px; width: 100%; position: relative; box-shadow: var(--shadow-lg); animation: slideUp 0.3s ease; }
+  @keyframes slideUp { from{transform:translateY(40px);opacity:0} to{transform:translateY(0);opacity:1} }
+  .modal-close { position: absolute; top: 16px; right: 16px; background: var(--gray-100); border: none; color: var(--gray-500); width: 32px; height: 32px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .modal-close:hover { background: var(--gray-200); color: var(--blue-dark); }
+  .modal h3 { font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; color: var(--blue-dark); }
+  .modal .sub { font-size: 0.83rem; color: var(--gray-500); margin-bottom: 24px; }
+  .modal-tabs { display: flex; gap: 6px; margin-bottom: 24px; background: var(--gray-100); padding: 4px; border-radius: 10px; }
+  .modal-tab { flex: 1; padding: 9px; text-align: center; border-radius: 7px; font-size: 0.82rem; font-weight: 700; cursor: pointer; font-family: 'Montserrat', sans-serif; border: none; background: transparent; color: var(--gray-500); transition: all 0.2s; }
+  .modal-tab.active { background: var(--blue-neon); color: #fff; box-shadow: 0 2px 8px rgba(25,118,210,0.3); }
+
+  .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .hero { flex-direction: column; padding-top: 100px; }
+    .hero-visual { width: 100%; }
+    .simulator-wrap, .sbs-wrap { grid-template-columns: 1fr; }
+    .security-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .metric-grid { grid-template-columns: 1fr 1fr; }
+    .stat-item { padding: 20px 24px; }
+  }
+  @media (max-width: 600px) {
+    .security-grid { grid-template-columns: 1fr; }
+    .metrics-row { grid-template-columns: 1fr; }
+    .metric-box { border-right: none; border-bottom: 1px solid var(--gray-200); }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Auto<span>Matics</span>® <span class="nav-badge">FINTECH</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">Características</a></li>
+    <li><a href="#simulator">Simulador</a></li>
+    <li><a href="#sbs">Transparencia</a></li>
+    <li><a href="#security">Seguridad</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="btn-outline" onclick="openModal('login')">Iniciar Sesión</button>
+    <button class="btn-primary" onclick="openModal('register')">Registrarse</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Software Fintech para Crédito Vehicular</div>
+    <h1>Financiamiento más inteligente.<br><em>Decisiones más rentables.</em></h1>
+    <p>Transformamos datos en decisiones financieras precisas para impulsar el crecimiento de tu negocio automotriz. Cumplimiento SBS garantizado.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="openModal('register')">🚀 Empezar ahora</button>
+      <button class="btn-outline" onclick="document.getElementById('simulator').scrollIntoView({behavior:'smooth'})">Simular Crédito →</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="tablet-mockup">
+      <div class="tablet-topbar">
+        <div class="tablet-dot" style="background:#ff5f57"></div>
+        <div class="tablet-dot" style="background:#febc2e"></div>
+        <div class="tablet-dot" style="background:#28c840"></div>
+        <div class="logo-sm">Auto<span>Matics</span></div>
+      </div>
+      <div class="metric-grid">
+        <div class="metric-card"><div class="metric-label">Total Financiado</div><div class="metric-val">$128M</div><div class="metric-chg">▲ 12.5%</div></div>
+        <div class="metric-card"><div class="metric-label">Contratos</div><div class="metric-val">3,462</div><div class="metric-chg">▲ 8.2%</div></div>
+        <div class="metric-card"><div class="metric-label">VAN Portafolio</div><div class="metric-val">$28.65M</div><div class="metric-chg">▲ 15.8%</div></div>
+        <div class="metric-card"><div class="metric-label">TIR Promedio</div><div class="metric-val">14.62%</div><div class="metric-chg">▲ 2.1%</div></div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-box">
+          <div class="chart-title">Análisis VAN</div>
+          <div class="chart-val">$28.65M</div>
+          <div class="chart-sub">▲ 15.8% vs mes anterior</div>
+          <svg class="mini-chart" viewBox="0 0 120 38" preserveAspectRatio="none">
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1976d2" stop-opacity="0.2"/><stop offset="100%" stop-color="#1976d2" stop-opacity="0"/></linearGradient></defs>
+            <polyline points="0,36 20,30 40,26 60,18 80,13 100,7 120,2" fill="none" stroke="#1976d2" stroke-width="2.5" stroke-linecap="round"/>
+            <polygon points="0,36 20,30 40,26 60,18 80,13 100,7 120,2 120,38 0,38" fill="url(#g1)"/>
+          </svg>
+        </div>
+        <div class="chart-box">
+          <div class="chart-title">Análisis TIR</div>
+          <div class="chart-val">14.62%</div>
+          <div class="chart-sub">▲ 2.1% vs mes anterior</div>
+          <svg class="mini-chart" viewBox="0 0 120 38" preserveAspectRatio="none">
+            <rect x="5" y="24" width="15" height="14" fill="#90caf9" rx="2"/>
+            <rect x="25" y="18" width="15" height="20" fill="#90caf9" rx="2"/>
+            <rect x="45" y="20" width="15" height="18" fill="#1976d2" rx="2"/>
+            <rect x="65" y="12" width="15" height="26" fill="#1976d2" rx="2"/>
+            <rect x="85" y="8" width="15" height="30" fill="#1565c0" rx="2"/>
+            <rect x="105" y="3" width="15" height="35" fill="#0d47a1" rx="2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">+3,400</div><div class="stat-desc">Créditos simulados</div></div>
+  <div class="stat-item"><div class="stat-num">100%</div><div class="stat-desc">Cumplimiento SBS</div></div>
+  <div class="stat-item"><div class="stat-num">S/ & $</div><div class="stat-desc">Multi-moneda</div></div>
+  <div class="stat-item"><div class="stat-num">VAN & TIR</div><div class="stat-desc">Análisis automático</div></div>
+</div>
+
+<!-- FEATURES -->
+<section class="section-pad features-bg" id="features">
+  <div class="section-header fade-in">
+    <div class="section-tag">Plataforma Completa</div>
+    <h2>Todo lo que necesitas para el<br>crédito vehicular inteligente</h2>
+    <p>Diseñado para entidades financieras que buscan eficiencia, transparencia y rentabilidad.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feat-card fade-in"><div class="feat-icon">🛒</div><h3>Compra Inteligente</h3><p>Método francés vencido ordinario con periodos de gracia total y parcial. Cálculos precisos adaptados al mercado peruano.</p></div>
+    <div class="feat-card fade-in"><div class="feat-icon">🏛️</div><h3>Cumplimiento SBS</h3><p>Todos los indicadores exigidos por la norma de transparencia del Sistema Financiero Peruano incluidos automáticamente.</p></div>
+    <div class="feat-card fade-in"><div class="feat-icon">💱</div><h3>Multi-moneda</h3><p>Opera indistintamente en Soles (S/) o Dólares ($). Tasas nominales o efectivas con capitalización configurable.</p></div>
+    <div class="feat-card fade-in"><div class="feat-icon">📊</div><h3>Análisis VAN & TIR</h3><p>Valor Actual Neto y Tasa Interna de Retorno calculados automáticamente desde la perspectiva del deudor.</p></div>
+    <div class="feat-card fade-in"><div class="feat-icon">👥</div><h3>Gestión de Clientes</h3><p>Base de datos completa de clientes y características del portafolio vehicular. Edición y modificación en tiempo real.</p></div>
+    <div class="feat-card fade-in"><div class="feat-icon">⚙️</div><h3>Configuración Total</h3><p>Define moneda, tipo de tasa, capitalización y periodos de gracia según los requerimientos de tu entidad financiera.</p></div>
+  </div>
+</section>
+
+<!-- SIMULATOR -->
+<section class="section-pad simulator-section" id="simulator">
+  <div class="section-header fade-in">
+    <div class="section-tag">Simulador de Crédito</div>
+    <h2>Simula tu plan de pagos<br>en segundos</h2>
+    <p>Método Francés Vencido Ordinario. Meses de 30 días. Resultados inmediatos.</p>
+  </div>
+  <div class="simulator-wrap">
+    <div class="sim-form-card fade-in">
+      <h3>Configurar Crédito</h3>
+      <div class="sub">Ingresa los parámetros de tu financiamiento vehicular</div>
+      <div class="form-group"><label>Moneda</label><select id="sim-currency" onchange="updateSimulator()"><option value="PEN">🇵🇪 Soles (S/)</option><option value="USD">🇺🇸 Dólares ($)</option></select></div>
+      <div class="form-group"><label>Precio del Vehículo</label><input type="number" id="sim-price" value="85000" oninput="updateSimulator()"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Inicial (%)</label><input type="number" id="sim-down" value="20" min="0" max="90" oninput="updateSimulator()"></div>
+        <div class="form-group"><label>Plazo (meses)</label><select id="sim-term" onchange="updateSimulator()"><option>12</option><option>24</option><option>36</option><option selected>48</option><option>60</option><option>72</option></select></div>
+      </div>
+      <div class="form-group"><label>Tipo de Tasa</label><select id="sim-ratetype" onchange="toggleCap()"><option value="effective">Tasa Efectiva Anual (TEA)</option><option value="nominal">Tasa Nominal Anual (TNA)</option></select></div>
+      <div class="form-row">
+        <div class="form-group"><label>Tasa (%)</label><input type="number" id="sim-rate" value="18" step="0.1" oninput="updateSimulator()"></div>
+        <div class="form-group" id="cap-group" style="display:none"><label>Capitalización</label><select id="sim-cap" onchange="updateSimulator()"><option value="12">Mensual</option><option value="4">Trimestral</option><option value="2">Semestral</option></select></div>
+      </div>
+      <div class="form-group"><label>Período de Gracia</label>
+        <div class="grace-btns">
+          <div class="grace-btn active" onclick="setGrace(this,'none')">Sin gracia</div>
+          <div class="grace-btn" onclick="setGrace(this,'partial')">Parcial</div>
+          <div class="grace-btn" onclick="setGrace(this,'total')">Total</div>
+        </div>
+      </div>
+      <div class="form-group" id="grace-months-group" style="display:none"><label>Meses de Gracia</label><input type="number" id="sim-grace-months" value="3" min="1" max="12" oninput="updateSimulator()"></div>
+      <button class="btn-primary sim-btn" onclick="updateSimulator()">⚡ Simular Crédito</button>
+    </div>
+    <div class="results-card fade-in">
+      <div class="results-header"><h3>Tabla de Pagos — Método Francés</h3><span class="badge-sbs">✓ SBS Compliant</span></div>
+      <div class="metrics-row">
+        <div class="metric-box"><div class="mlabel">VAN (Deudor)</div><div class="mval" id="res-van">–</div><div class="msub" id="res-van-sub"></div></div>
+        <div class="metric-box"><div class="mlabel">TIR Mensual</div><div class="mval" id="res-tir">–</div><div class="msub" id="res-tir-sub"></div></div>
+        <div class="metric-box"><div class="mlabel">Cuota Mensual</div><div class="mval" id="res-fee">–</div><div class="msub" id="res-fee-sub"></div></div>
+        <div class="metric-box"><div class="mlabel">Costo Total</div><div class="mval" id="res-total">–</div><div class="msub" id="res-total-sub"></div></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>N°</th><th>Saldo Inicial</th><th>Interés</th><th>Amortización</th><th>Seg. Desgrav.</th><th>Cuota</th><th>Saldo Final</th></tr></thead>
+          <tbody id="payment-table"><tr><td colspan="7" style="text-align:center;color:var(--gray-500);padding:30px;font-size:0.85rem;">Configura los parámetros y haz clic en "Simular"</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SBS -->
+<section class="section-pad sbs-section" id="sbs">
+  <div class="sbs-wrap">
+    <div class="fade-in">
+      <div class="sbs-icon">🏛️</div>
+      <h2>Transparencia SBS garantizada</h2>
+      <p>Cumplimos con todos los requisitos de la norma de transparencia de la información del Sistema Financiero Peruano.</p>
+      <div class="sbs-items">
+        <div class="sbs-item"><div class="sbs-check">✓</div><p><strong>Seguro de Desgravamen</strong> — Incluido en cada cuota del plan de pagos según normativa vigente.</p></div>
+        <div class="sbs-item"><div class="sbs-check">✓</div><p><strong>Gastos Administrativos</strong> — Transparencia total en costos y comisiones de la operación.</p></div>
+        <div class="sbs-item"><div class="sbs-check">✓</div><p><strong>TCEA Publicada</strong> — Tasa de Costo Efectivo Anual calculada y mostrada obligatoriamente.</p></div>
+        <div class="sbs-item"><div class="sbs-check">✓</div><p><strong>VAN & TIR del préstamo</strong> — Indicadores de rentabilidad desde la perspectiva del deudor.</p></div>
+      </div>
+    </div>
+    <div class="sbs-visual fade-in">
+      <h4>📋 Resumen de Costos (Ejemplo)</h4>
+      <div class="cost-item"><span class="cname">Precio del Vehículo</span><span class="cval">S/ 85,000</span></div>
+      <div class="cost-item"><span class="cname">Cuota Inicial (20%)</span><span class="cval">S/ 17,000</span></div>
+      <div class="cost-item"><span class="cname">Monto a Financiar</span><span class="cval">S/ 68,000</span></div>
+      <div class="cost-item"><span class="cname">TEA</span><span class="cval">18.00%</span></div>
+      <div class="cost-item"><span class="cname">Seguro de Desgravamen</span><span class="cval">0.06% mensual</span></div>
+      <div class="cost-item"><span class="cname">Gastos Administrativos</span><span class="cval">S/ 120</span></div>
+      <div class="cost-item"><span class="cname">Plazo</span><span class="cval">48 meses</span></div>
+      <div class="cost-item total"><span class="cname">TCEA Estimada</span><span class="cval">~21.4%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section class="section-pad security-bg" id="security">
+  <div class="section-header fade-in"><div class="section-tag">Acceso Seguro</div><h2>Tu información, protegida</h2></div>
+  <div class="security-grid">
+    <div class="sec-card fade-in"><div class="sec-icon">🔐</div><h4>Login Seguro</h4><p>Acceso obligatorio con usuario y contraseña. Autenticación de múltiple factor para máxima protección.</p></div>
+    <div class="sec-card fade-in"><div class="sec-icon">🗄️</div><h4>Base de Datos Encriptada</h4><p>Información de clientes y portafolio vehicular almacenada con cifrado de nivel bancario.</p></div>
+    <div class="sec-card fade-in"><div class="sec-icon">✏️</div><h4>Gestión Completa</h4><p>Alta, edición y modificación de datos de clientes y vehículos. Control total del historial de operaciones.</p></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><span class="nav-logo">Auto<span>Matics</span>®</span><p>Software Fintech para financiamiento automotriz. Compra inteligente, rentabilidad garantizada.</p></div>
+    <div class="footer-col"><h5>Plataforma</h5><a href="#features">Características</a><a href="#simulator">Simulador</a><a href="#sbs">Transparencia SBS</a><a href="#security">Seguridad</a></div>
+    <div class="footer-col"><h5>Acceso</h5><a href="#" onclick="openModal('login')">Iniciar Sesión</a><a href="#" onclick="openModal('register')">Crear Cuenta</a><a href="#">Recuperar Contraseña</a></div>
+    <div class="footer-col"><h5>Legal</h5><a href="#">Política de Privacidad</a><a href="#">Términos de Uso</a><a href="#">Normativa SBS</a></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 AutoMatics. Todos los derechos reservados. | Perú</p>
+    <div class="footer-seal">FINTECH SOLUTIONS</div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBg(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-tabs">
+      <button class="modal-tab active" onclick="switchTab(this,'login')">Iniciar Sesión</button>
+      <button class="modal-tab" onclick="switchTab(this,'register')">Registrarse</button>
+    </div>
+    <h3 id="modal-title">Bienvenido a AutoMatics</h3>
+    <div class="sub" id="modal-sub">Ingresa tus credenciales para acceder a la plataforma.</div>
+    <div class="form-group"><label>Email / Usuario</label><input type="email" placeholder="usuario@empresa.com"></div>
+    <div class="form-group"><label>Contraseña</label><input type="password" placeholder="••••••••"></div>
+    <div id="register-extra" style="display:none">
+      <div class="form-group"><label>Nombre completo</label><input type="text" placeholder="Carlos Méndez"></div>
+      <div class="form-group"><label>Empresa / Entidad</label><input type="text" placeholder="Banco XYZ S.A."></div>
+    </div>
+    <button class="btn-primary" style="width:100%;padding:14px;font-size:1rem;border-radius:11px;margin-top:6px" id="modal-btn">Ingresar →</button>
+  </div>
+</div>
+
+<script>
+  let graceType = 'none';
+  function setGrace(el, type) {
+    document.querySelectorAll('.grace-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active'); graceType = type;
+    document.getElementById('grace-months-group').style.display = type !== 'none' ? 'block' : 'none';
+    updateSimulator();
+  }
+  function toggleCap() {
+    document.getElementById('cap-group').style.display = document.getElementById('sim-ratetype').value === 'nominal' ? 'block' : 'none';
+    updateSimulator();
+  }
+  function updateSimulator() {
+    const currency = document.getElementById('sim-currency').value === 'PEN' ? 'S/' : '$';
+    const price = parseFloat(document.getElementById('sim-price').value) || 85000;
+    const downPct = parseFloat(document.getElementById('sim-down').value) || 20;
+    const n = parseInt(document.getElementById('sim-term').value) || 48;
+    const rateInput = parseFloat(document.getElementById('sim-rate').value) || 18;
+    const rateType = document.getElementById('sim-ratetype').value;
+    const capN = parseInt(document.getElementById('sim-cap')?.value || 12);
+    const gracePeriods = graceType !== 'none' ? (parseInt(document.getElementById('sim-grace-months').value) || 0) : 0;
+    const loan = price - price * (downPct / 100);
+    const segDesgrav = 0.0006;
+    let mr = rateType === 'effective' ? Math.pow(1 + rateInput/100, 1/12)-1 : Math.pow(1+(rateInput/100)/capN, capN/12)-1;
+    let balance = loan, rows = [], totalPaid = 0;
+    for (let i = 1; i <= n; i++) {
+      const initBal = balance, interest = balance * mr, seg = balance * segDesgrav;
+      let amort = 0, cuota = 0;
+      if (i <= gracePeriods) { amort = 0; cuota = graceType === 'total' ? seg : interest + seg; }
+      else {
+        const normalN = n - gracePeriods, normalI = i - gracePeriods;
+        const fixedPmt = balance * mr / (1 - Math.pow(1+mr, -(normalN-(normalI-1))));
+        amort = fixedPmt - interest; cuota = fixedPmt + seg;
+      }
+      balance = Math.max(balance - amort, 0); totalPaid += cuota;
+      rows.push({ i, initBal, interest, amort, seg, cuota, balance });
+    }
+    let van = loan;
+    for (let k = 0; k < rows.length; k++) van -= rows[k].cuota / Math.pow(1+mr, k+1);
+    let tir = mr;
+    for (let it = 0; it < 50; it++) {
+      let f = -loan, df = 0;
+      for (let k = 0; k < rows.length; k++) { f += rows[k].cuota/Math.pow(1+tir,k+1); df -= (k+1)*rows[k].cuota/Math.pow(1+tir,k+2); }
+      tir = tir - f/df;
+    }
+    const fmt = v => currency + ' ' + Math.abs(v).toLocaleString('es-PE',{minimumFractionDigits:2,maximumFractionDigits:2});
+    document.getElementById('res-van').textContent = fmt(van);
+    document.getElementById('res-van-sub').textContent = van >= 0 ? '▲ Rentable para el acreedor' : '▼ Analizar condiciones';
+    document.getElementById('res-tir').textContent = (tir*100).toFixed(4)+'%';
+    document.getElementById('res-tir-sub').textContent = 'TIR Anual: '+((Math.pow(1+tir,12)-1)*100).toFixed(2)+'%';
+    document.getElementById('res-fee').textContent = fmt(rows[gracePeriods]?.cuota || 0);
+    document.getElementById('res-fee-sub').textContent = 'Incluye seguro desgravamen';
+    document.getElementById('res-total').textContent = fmt(totalPaid);
+    document.getElementById('res-total-sub').textContent = 'Interés total: '+fmt(totalPaid-loan);
+    const disp = rows.length <= 12 ? rows : [...rows.slice(0,8), null, rows[rows.length-1]];
+    document.getElementById('payment-table').innerHTML = disp.map(r => {
+      if (!r) return `<tr><td colspan="7" style="text-align:center;color:var(--gray-300);font-size:0.75rem;padding:8px">· · ·</td></tr>`;
+      const g = r.i <= gracePeriods;
+      return `<tr><td>${r.i}${g?` <span style="font-size:0.6rem;color:var(--blue-neon)">G</span>`:''}</td><td>${fmt(r.initBal)}</td><td style="color:var(--coral)">${fmt(r.interest)}</td><td class="td-green">${fmt(r.amort)}</td><td style="color:var(--gray-500)">${fmt(r.seg)}</td><td style="color:var(--blue-dark);font-weight:700">${fmt(r.cuota)}</td><td>${fmt(r.balance)}</td></tr>`;
+    }).join('');
+  }
+  function openModal(tab) {
+    document.getElementById('modal-overlay').classList.add('open');
+    if (tab === 'register') document.querySelectorAll('.modal-tab')[1].click();
+  }
+  function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+  function closeModalOnBg(e) { if (e.target.id === 'modal-overlay') closeModal(); }
+  function switchTab(el, tab) {
+    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active')); el.classList.add('active');
+    const isR = tab === 'register';
+    document.getElementById('modal-title').textContent = isR ? 'Crear cuenta' : 'Bienvenido a AutoMatics';
+    document.getElementById('modal-sub').textContent = isR ? 'Completa tus datos para registrarte.' : 'Ingresa tus credenciales para acceder.';
+    document.getElementById('register-extra').style.display = isR ? 'block' : 'none';
+    document.getElementById('modal-btn').textContent = isR ? 'Crear cuenta →' : 'Ingresar →';
+  }
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+  updateSimulator();
+</script>
+</body>
+</html>
